@@ -1,11 +1,12 @@
 import os
-from langchain_community.embeddings import HuggingFaceEmbeddings
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
-from langchain.document_loaders import TextLoader
+# from langchain.document_loaders import TextLoader
 from langchain.llms.base import LLM
+from langchain.schema import Document
 from typing import List, Optional, Any, Dict
 from llama_cpp import Llama
 from pydantic import Field, PrivateAttr
@@ -126,8 +127,13 @@ class RAGApplication:
             file_path = os.path.join(directory, file_name)
             # Ensure only text files are processed
             if os.path.isfile(file_path) and file_name.endswith(".txt"):
-                loader = TextLoader(file_path)
-                documents.extend(loader.load())
+                try:
+                    with open(file_path, 'r', encoding='utf-8') as f:
+                        content = f.read()
+                    # Wrap content in a Document object
+                    documents.append(Document(page_content=content, metadata={"source": file_name}))
+                except UnicodeDecodeError:
+                    print(f"Skipping file {file_name} due to encoding issues.")
         
         # Split documents into chunks
         texts = self.text_splitter.split_documents(documents)

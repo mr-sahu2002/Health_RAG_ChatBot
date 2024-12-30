@@ -31,6 +31,6 @@ async def query_rag(request: QueryRequest):
     """
     try:
         answer = rag.query(request.question)
-        return {"question": {request.question}, "answer": {answer}}
+        return {"question": request.question, "answer": answer}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error processing query: {str(e)}")

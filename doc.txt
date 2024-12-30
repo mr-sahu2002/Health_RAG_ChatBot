@@ -1,0 +1,26 @@
+Tech stack:
+
+Llm 1-1.5B parameter-> https://huggingface.co/hugging-quants/Llama-3.2-1B-Instruct-Q8_0-GGUF
+Framework-> Langchain
+VectorDB-> FAISS
+embedding_model-> https://huggingface.co/sentence-transformers/all-mpnet-base-v2
+scrapping-> https://llmstxt.firecrawl.dev/ and https://www.firecrawl.dev/
+Backend-> Fastapi 
+
+Reverse proxy-> Nginx
+To expose the url-> Ngrok 
+Containerize-> Docker  
+
+
+
+Data sources:
+https://www.webmd.com/
+https://www.mayoclinic.org/
+
+
+To run:
+uvicorn main:app --host 127.0.0.1 --port 8000
+--workers 4
+
+ngrok http 8000
+
