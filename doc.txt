@@ -7,7 +7,7 @@ embedding_model-> https://huggingface.co/sentence-transformers/all-mpnet-base-v2
 scrapping-> https://llmstxt.firecrawl.dev/ and https://www.firecrawl.dev/
 Backend-> Fastapi 
 
-Reverse proxy-> Nginx
+caching-> Redis
 To expose the url-> Ngrok 
 Containerize-> Docker  
 
@@ -15,7 +15,6 @@ Containerize-> Docker
 
 Data sources:
 https://www.webmd.com/
-https://www.mayoclinic.org/
 
 
 To run:

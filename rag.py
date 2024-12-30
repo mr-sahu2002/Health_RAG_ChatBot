@@ -4,7 +4,6 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
 from langchain.chains import RetrievalQA
 from langchain.prompts import PromptTemplate
-# from langchain.document_loaders import TextLoader
 from langchain.llms.base import LLM
 from langchain.schema import Document
 from typing import List, Optional, Any, Dict
@@ -204,7 +203,7 @@ if __name__ == "__main__":
     # Initialize the RAG application
     rag = RAGApplication(model_path=MODEL_PATH)
     
-    # # create a vector store
+    #create a vector store
     rag.load_documents("data")
     rag.save_vector_store("vector_store")
 
