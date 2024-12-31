@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  rag_api:
+    build:
+      context: .
+      dockerfile: DockerFile
+      args:
+        - BUILDKIT_INLINE_CACHE=1
+    ports:
+      - "8000:8000"
+    volumes:
+      - type: bind
+        source: ./data
+        target: /app/data
+        read_only: true
+      - type: bind
+        source: ./vector_store
+        target: /app/vector_store
+      - type: bind
+        source: ./model
+        target: /app/model
+        read_only: true
+    environment:
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      MODEL_PATH: /app/model/llama-3.2-1b-instruct-q4_k_m.gguf
+    depends_on:
+      - redis
+    restart: unless-stopped
+    networks:
+      - rag_network
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    networks:
+      - rag_network
+
+volumes:
+  redis_data:
+
+networks:
+  rag_network:
+    driver: bridge

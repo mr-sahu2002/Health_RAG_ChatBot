@@ -87,9 +87,9 @@ Pygments==2.18.0
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
 python-multipart==0.0.20
-pywin32==308
 PyYAML==6.0.2
 pyzmq==26.2.0
+redis==5.2.1 
 referencing==0.35.1
 regex==2024.11.6
 requests==2.32.3
@@ -113,7 +113,6 @@ tenacity==9.0.0
 threadpoolctl==3.5.0
 tinycss2==1.4.0
 tokenizers==0.21.0
-torch==2.5.1
 tornado==6.4.2
 tqdm==4.67.1
 traitlets==5.14.3

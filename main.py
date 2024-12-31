@@ -49,7 +49,7 @@ async def lifespan(app: FastAPI):
     print("Starting up...")
     thread_pool = ThreadPoolExecutor(max_workers=5)
     redis_pool = ConnectionPool(
-        host='localhost',
+        host='redis',
         port=6379,
         db=0,
         max_connections=10
